@@ -1,9 +1,10 @@
 # Site settings
-title: blog.nfi.io
+title: nfirvine.github.io blog
 email: "'@'.join(['nfirvine']*2)+'.com'"
 description: "DevOps, Ubuntu, and tech stuff"
 baseurl: ""
-url: "http://blog.nfi.io"
+url: "http://nfirvine.github.com"
+username: nfirvine
 
 # Build settings
 markdown: kramdown
