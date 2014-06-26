@@ -1,0 +1,10 @@
+# Site settings
+title: blog.nfi.io
+email: "'@'.join(['nfirvine']*2)+'.com'"
+description: "DevOps, Ubuntu, and tech stuff"
+baseurl: ""
+url: "http://blog.nfi.io"
+
+# Build settings
+markdown: kramdown
+permalink: pretty

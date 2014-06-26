@@ -1,0 +1,26 @@
+---
+layout: post
+title: "The Charter"
+date: 2014-06-26 14:25:39
+---
+
+I've had a blog before. I used it mostly to write about emo things an 18-year-old would be
+concerned about, like why girls didn't like me and how great GTA 3 was.
+
+This one's gonna be different. 
+
+First, screw Wordpress. And screw Dreamhost. 
+
+Second, I want it to be professional. Not businessy, but something I could list on my LinkedIn. 
+Maybe it'll have swearing sometimes. Probably it'll have lots of code, a tech rant here and there.
+
+Why a blog though? In 2014? Don't we have Facebook, Google Plus, and Twitter for that now?
+
+Well, I want to have code snippets and lots of control over how it looks. Basically that's it.
+Also, I want to keep those other things relatively conversational and short form, while this is for
+longer things.
+
+So what sorts of things will I cover? I'm deep into the DevOps game now, and I come across
+exciting new tricks, toys, and tech all the time.  It's not always worth the time to get stuff into
+prod or the prod pipeline, but I *do* have the time to gab about it on the Internet. So this'll be
+an outlet for that sort of thing.
