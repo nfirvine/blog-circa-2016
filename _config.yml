@@ -1,9 +1,9 @@
 # Site settings
-title: nfirvine.github.io blog
-email: "'@'.join(['nfirvine']*2)+'.com'"
+title: blog.nfi.io
+email: "nick@nfi.io"
 description: "DevOps, Ubuntu, and tech stuff"
 baseurl: ""
-url: "http://nfirvine.github.com"
+url: "http://blog.nfi.io"
 username: nfirvine
 
 # Build settings
