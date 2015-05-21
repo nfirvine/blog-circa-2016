@@ -1,3 +1,9 @@
+---
+layout: post
+title: What to do with abandoned FOSS?
+date: 2015-05-20
+---
+
 Trying to set up a new workstartion with the Solarized colour scheme in my terminal and vim. After an hour of banging my head against the wall, I've given in and just type random words into Google. I find [a helpful askubuntu post that notes that the format of the colors spec is outdated](http://askubuntu.com/questions/315230/solarized-theme-in-terminal-vim-on-xubuntu). The repo is useless.
 
 Turns out the repo I was using is dead. Somebody reported this bug ages ago, and the maintainer never fixed it. It's a trivial amount of work really, probably a Vim one-liner.
