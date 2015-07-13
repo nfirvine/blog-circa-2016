@@ -1,41 +1,14 @@
-Ansible. Ansible Ansible Ansible. Everybody's all about Ansible these days. And it's good. It's pretty simple when compared to Salt and Chef and the rest. It uses some common and easy to learn tech like Python, YAML, and Jinja, so you don't have to learn a weird Ruby DSL; I already know Python and YAML pretty well. You can reuse your existing SSH infrastructure too.
-
-But it's not without its flaws. In fact, I argue that if you're doing anything beyond the usual "I want to trigger a bunch of scripts to run on these hosts", Ansible's probably the wrong choice.
-
-I worked with Ansible a long time ago for IT stuff like configuring servers, as well as a little deployment stuff. But it was always just used on the fringes to trigger some remote Python or Bash scripts. Recently, though, I got a chance to dive a little deeper. A client wanted to automated the complete creation of his web app in AWS. Seems like the type of thing Ansible would be great at.
-
-The app in question has some pretty standard bits:
-
-- A handful of Python web apps, reverse-proxied with Nginx
-- RDS database
-- Elasticache cache
-
-Couldn't be simpler, right? Well, it ended up taking me several hundred lines of ansible with plenty of stupid hacks and shelling out.
-
-What is Ansible supposed to be?
-===============================
-
-If I'm going to knock something, I like to clarify what I think that thing is: maybe it doesn't suck -- my mental model is just broken.
-
-Ansible is an automation tool. At the top level, you write playbooks to ["describe a policy ..., or a set of steps"](http://docs.ansible.com/playbooks.html), where a playbook is a list plays, each of which is a number of tasks to be executed on a set of hosts. Tasks are almost always invocations of Ansible "modules" -- Python scripts that are deployed to the remote host and called with some arguments.
-
-Ultimately, playbooks are a sort of "metascript", a script for triggering scripts. Bash as it stands has rather limited (read: non-exist) support for remote execution, but with a playbook, you can orchestrate a bunch of scripts to fire on certain hosts in series. Playbooks have a sort of implied zeroth play, which is to reach out to each host and fetch a huge chunk of its state.
-
-["Playbooks are designed to be human-readable and are developed in a basic text language."](http://docs.ansible.com/playbooks.html) Ansible says it's simple, presumably to appeal to all of us who thought Chef was too foreign to comprehend. We're dealing with hard problems here, and making it simple is no small task. In Ansible, a lot of the complexity is in the modules, not the core.
-
-Ansible has a first-class use case document claiming it has ["extensive AWS support"](http://www.ansible.com/aws).
-
-How it doesn't do any of that
-=============================
-
-The Ansible pseudo-language
----------------------------
+---
+title: Ansible Part 1: The Ansible Pseudo-Language
+published: false
+tags: [ansible]
+---
 
 > We didn't want to create a new language like Chef, so we frankensteined together some hot web tech.
 
--- Not a real quote, naturally
+> -- <cite>Ansible designers (not a real quote, naturally)</cite>
 
-Playbooks are written in YAML. You've probably seen YAML before. It's pretty straightforward data serialization format, very similar to JSON (in fact, it's a superset), but with sane additions like comments and not having to quote string keys. It's much much lighter than XML, but can represent a lot of the same things. Ruby on Rails is really hot on it. IMHO, it's better than JSON in every way I can think of.
+Ansible playbooks are written in YAML. You've probably seen YAML before. It's pretty straightforward data serialization format, very similar to JSON (in fact, it's a superset), but with sane additions like comments and not having to quote string keys. It's much much lighter than XML, but can represent a lot of the same things. Ruby on Rails is really hot on it. IMHO, it's better than JSON in every way I can think of.
 
 The choice of using a serialization format to represent what is essentially a list of instructions is an odd one. That sounds like a *script* to me. Having your code look like it's declarative is deceptive when it's definitely going to get executed sequentially, like a script. We'd all love to think of our systems as sets of declarative configuration statements, but that's simply not realistic: entropy creeps into that careful order, and time rots all bits. And as your systems' states drift and that diff gets longer, it's harder to pull it back on course.
 
