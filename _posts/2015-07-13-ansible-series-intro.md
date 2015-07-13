@@ -1,5 +1,7 @@
 ---
 title: Ansible: Not the Silver Bullet You Were Looking For (Part 0)
+layout: post
+date: 2015-07-13
 tags: [ansible]
 ---
 Ansible. Ansible Ansible Ansible. Everybody's all about Ansible these days. And it's good. It's pretty simple when compared to Salt and Chef and the rest. It uses some common and easy to learn tech like Python, YAML, and Jinja, so you don't have to learn a weird Ruby DSL; I already know Python and YAML pretty well. You can reuse your existing SSH infrastructure too.
