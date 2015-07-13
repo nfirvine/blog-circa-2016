@@ -1,5 +1,5 @@
 ---
-title: Ansible: Not the Silver Bullet You Were Looking For (Part 0)
+title: 'Ansible: Not the Silver Bullet You Were Looking For (Part 0)'
 layout: post
 date: 2015-07-13
 tags: [ansible]
