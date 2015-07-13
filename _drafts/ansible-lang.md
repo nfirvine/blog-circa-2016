@@ -1,7 +1,7 @@
 ---
-title: Ansible Part 1: The Ansible Pseudo-Language
+title: 'Ansible: The Bronze Bullet, Part 1: The Ansible Pseudo-Language'
 published: false
-tags: [ansible]
+tags: [ansible_bronze_bullet, ansible]
 ---
 
 > We didn't want to create a new language like Chef, so we frankensteined together some hot web tech.
