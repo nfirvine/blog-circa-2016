@@ -15,39 +15,39 @@ The choice of using a serialization format to represent what is essentially a li
 
 Ansible makes that age old mistake of using the extension of its data format. A playbook is not just any old YAML, it's got a specific structure that looks sort of like this:
 
-{% highlight yaml %}
+{% highlight yaml %}{% raw %}
 - name: #< the map that "name" goes in is a play
   hosts: <host list>
   tasks: <task list>
-{% endhighlight %}
+{% endraw %}{% endhighlight %}
 
 And is named `<something>.yml`. When you get into roles, you'll also see `{tasks,handlers,vars,meta}/main.yml`, and these each expect different data structures. But damned if you can tell them apart in a text editor by just the filename.
 
-There's a problem with treating your script as declaritive: there's no looping structures and no if statements. Ansible fixes this by (along with `with_` loop construct, which we'll get to later) adding another third-party language on top: Jinja. But it's not declarative YAML inside Jinja templates, the way Jinja works with HTML; it's the other way around: Jinja templates inside YAML strings.
+There's a problem with treating your script as declaritive: there's no variables or looping structures or if statements. Ansible fixes this by (along with `with_` loop construct, which we'll get to later) adding another third-party language on top: Jinja. But it's not declarative YAML inside Jinja templates, the way Jinja works with HTML; it's the other way around: Jinja templates inside YAML strings.
 
 Jinja is a semi-respectable language on its own, sure: it's easy enough to write, kind of like Python. Ish. Anyway, its data model maps to Python. Kind of. What's not easy is writing Jinja templates inside YAML strings. You see, most of the time, if you're writing a key-value pair for a map in YAML, and the value is a string, you can just write this, without using quotes:
 
-{% highlight yaml %}
+{% highlight yaml %}{% raw %}
 key: I am a value
-{% endhighlight %}
+{% endraw %}{% endhighlight %}
 
 or in equivalent JSON:
 
-{% highlight json %}
+{% highlight json %}{% raw %}
 {"key": "I am a value"}
-{% endhighlight %}
+{% endraw %}{% endhighlight %}
 
 But there's what the Ansible docs call a ["YAML gotcha"](http://docs.ansible.com/YAMLSyntax.html#gotchas): When you're writing templated values (like variables), Jinja uses syntax like `{{var}}`, and this collides with YAML's inline map notation. Instead of this:
 
-{% highlight yaml %}
+{% highlight yaml %}{% raw %}
 target_host: {{hostname}}
-{% endhighlight %}
+{% endraw %}{% endhighlight %}
 
 turning into this:
 
-{% highlight json %}
+{% highlight json %}{% raw %}
 {"target_host": "nfi.io"}
-{% endhighlight %}
+{% endraw %}{% endhighlight %}
 
 you get a syntax error because it looks to YAML like you wrote some broken maps with missing values. The solution is to put explicit quotes around your templated strings, and only around the rest of your strings if you feel like it or if you might template them someday.
 
@@ -71,19 +71,19 @@ It makes you wonder why just stick with JSON? Well, JSON's fiddly to write and d
 
 Check this out; one more language (I call it "CGI-style"): `key=value key=value`. But this only works for module arguments. Let's see [how it's used in the docs](http://docs.ansible.com/ec2_module.html):
 
-{% highlight yaml %}
+{% highlight yaml %}{% raw %}
 - name: Add new instance to host group
   add_host: hostname={{ item.public_ip }} groupname=launched
-{% endhighlight %}
+{% endraw %}{% endhighlight %}
 
 Which is equivalent to:
 
-{% highlight yaml %}
+{% highlight yaml %}{% raw %}
 - name:
   add_host:
     hostname: '{{item.public_ip}}'
     groupname: launched
-{% endhighlight %}
+{% endraw %}{% endhighlight %}
 
 Did you count how many languages that is in one line in the example? 3: YAML, Jinja, and CGI-style. That means three different sets of things like quoting, typing, and escaping. Can Jinja handle unicode curly quotes? I don't know, and I certainly don't want to have to figure it out three times. 
 
@@ -102,10 +102,10 @@ A task can take a `with_items` argument to specify that you want to do this task
 
 Even so, let's just ignore that warning for a second. Let's say you got a dictionary from the last command that maps filenames to modes, and you want to print them. You'd think you could do this:
 
-{% highlight yaml %}
+{% highlight yaml %}{% raw %}
 shell: echo {{item[0]}}'s mode is {{item[1]}}
 with_items: '{{ [[filename, mode] for filename, mode in filemodes.itervalues()] }}.
-{% endhighlight %}
+{% endraw %}{% endhighlight %}
 
 Nope. Jinja2 isn't real Python, and doesn't support generators. Ansible works around this by introducing a *family* of underspecified looping constructs that map a variety of inputs types to a variety of output types. `with_together: [list1, list2]` is equivalent to `with_items: zip(list1, list2)`, if that syntax worked in Jinja, and it's shorter and certainly clearer. Reinventing the wheel, making it subtly different, and then calling it a "round mobility blob" is pretty frustrating.
 
@@ -114,15 +114,15 @@ Patterns: yet another goofy Ansible invention
 
 In the `hosts` argument to a play (among other places), you can specify a pattern to match a set of hosts. The pattern syntax supports wildcards, regexs, and some set operations. The set operators are:
 
-- : -- or; union
-- :& -- and; intersection
-- :! -- difference
+- `:` -- or; union
+- `:&` -- and; intersection
+- `:!` -- difference
 
 Where the hell did they get those? I dunno. Python, for example, has some perfectly reasonable set operators:
 
-- | -- union
-- & -- intersection
-- - -- difference
+- `|` -- union
+- `&` -- intersection
+- `-` -- difference
 
 Notice how they're analogous to their bitwise operator counterparts? Isn't that handy? One less thing to remember.
 
