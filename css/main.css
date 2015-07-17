@@ -254,7 +254,7 @@ a[rel="tag"]:hover {
   font-size: 15px;
 }
 
-.post code { padding: 1px 5px; }
+.post code { padding: 1px 0px;  }
 
 .post ul,
 .post ol { margin-left: 1.35em; }
