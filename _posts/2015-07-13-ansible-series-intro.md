@@ -36,4 +36,4 @@ Ansible has a first-class use case document claiming it has ["extensive AWS supp
 Next time on Ansible: Not the Silver Bullet...
 ==============================================
 
-I'm going to be talking about the Ansible language, playbooks.
+I'm going to be talking about [the Ansible language, playbooks]({% post_url 2015-07-17-ansible-lang %}).
