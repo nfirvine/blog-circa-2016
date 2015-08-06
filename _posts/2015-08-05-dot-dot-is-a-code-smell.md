@@ -20,6 +20,6 @@ Furthermore, `..` and especially chains like `../../../..` don't exactly lend th
 
 Another problem arises when we need to move directories around: `..`-chains are fragile and unexpected, so if we were to move the directory into a subdirectory, it wouldn't be able to find its dependencies. When you try to fix this, you run into the lack-of-context problem above.
 
-One usage of `..`-chains I've seen is to reach back up to the top level of a project, and then descend down into a different subproject. I would argue this is evidence of a bad build system. Top-level build files should be able to locate dependencies on behalf of deeper files. It's a seperations-of-concerns thing.
+One usage of `..`-chains I've seen is to reach back up to the top level of a project, and then descend down into a different subproject. I would argue this is evidence of a bad build system. Top-level build files should be able to locate dependencies on behalf of deeper files. It's a separations-of-concerns thing.
 
 In summary, the "A" in the dependency DAG is an important property that takes discipline to maintain. Proper trees are significantly easier to reason about.
