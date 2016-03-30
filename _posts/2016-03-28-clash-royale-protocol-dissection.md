@@ -21,7 +21,7 @@ Basically the way it works is that you:
 - write a dissector, a function that marks parts of the packet buffer as belonging to fields and adding them to the Wireshark display tree
 - register the Proto as a dissector for a given UDP port
 
-[https://github.com/nfirvine/croy-shark](Here's the dissector, written for Wireshark's Lua.)
+[Here's the dissector, written for Wireshark's Lua.](https://github.com/nfirvine/croy-shark)
 
 # Method
 
@@ -29,9 +29,9 @@ This analysis was just passive: I didn't interfere with traffic at all.
 
 I also made a screen recording of the match to correlate events with network traffic.
 
-I wrote [https://github.com/nfirvine/fakereplay](a tool I call "fakereplay"), which simply replays a pcap file in real time given the timing information it contains. I used this to 
+I wrote [a tool I call "fakereplay"](https://github.com/nfirvine/fakereplay), which simply replays a pcap file in real time given the timing information it contains. I used this to 
 
-To match game events with network events, I made a screen recording of the fake replay, one screen for client->server events, and one screen for server->client events. These were imported into iMovie. I added markers to these clips for interesting events and tried to match them up.
+To match game events with network events, I made a screen recording of the fake replay, one screen for client→server events, and one screen for server→client events. These were imported into iMovie. I added markers to these clips for interesting events and tried to match them up.
 
 # Observations
 
@@ -39,7 +39,7 @@ To match game events with network events, I made a screen recording of the fake 
     - Could play against a friend on another phone to see if token is shared between opponents
 - Datagrams appear to be sent on timers rather than based on game events. 
     - From client to server, it's 5Hz; from server to client, 2 Hz.
-    - Most of the client -> server datagrams are empty (except for the session token); probably a no-op keepalive.
+    - Most of the client → server datagrams are empty (except for the session token); probably a no-op keepalive.
 - The first packet with data looks like some sort of initialization: 1387 bytes of `0x00`.
     - 1387 = 19*73; maybe some sort of additional map data? Seems inefficient...
     - The full size of the UDP data is 1400; perhaps testing for MTU?
@@ -48,8 +48,8 @@ To match game events with network events, I made a screen recording of the fake 
     - It looks encrypted; I can't see any pattern. I would guess it's something simple, like `ciphertext = plaintext XOR (session token + seq no)`. Perhaps it is simply compressed. Maybe both.
     - A packet length analysis shows the payloads fit into two size ranges:
         - 7-8: probably unit movement
-        - 22-24 (client -> server); 30-59 (server -> client): probably unit spawning. 
-    - each c->s spawn is followed immediately by a s->c spawn. Presumably these datagram pairs contain very similar information. Difference in size ranges from 8-11, with 25 and 30 outliers. This would counterindicate compression or encryption alone.
+        - 22-24 (client → server); 30-59 (server → client): probably unit spawning. 
+    - each c→s spawn is followed immediately by a s→c spawn. Presumably these datagram pairs contain very similar information. Difference in size ranges from 8-11, with 25 and 30 outliers. This would counterindicate compression or encryption alone.
 
 # Next steps
 
