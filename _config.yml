@@ -9,3 +9,11 @@ username: nfirvine
 # Build settings
 markdown: kramdown
 permalink: pretty
+
+exclude:
+  - LICENSE
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+  - CNAME
+
