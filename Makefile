@@ -12,3 +12,7 @@ publish-dry:
 
 publish:
 	aws s3 sync --exclude=.DS_Store _site/ s3://blog.nfi.io
+
+view:
+	( sleep 5 ; open http://localhost:4000 ) &
+	bundle exec jekyll serve 
