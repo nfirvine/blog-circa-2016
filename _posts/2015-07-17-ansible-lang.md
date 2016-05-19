@@ -37,7 +37,7 @@ or in equivalent JSON:
 {"key": "I am a value"}
 {% endraw %}{% endhighlight %}
 
-But there's what the Ansible docs call a ["YAML gotcha"](http://docs.ansible.com/YAMLSyntax.html#gotchas): When you're writing templated values (like variables), Jinja uses syntax like `{{var}}`, and this collides with YAML's inline map notation. Instead of this:
+But there's what the Ansible docs call a ["YAML gotcha"](http://docs.ansible.com/YAMLSyntax.html#gotchas): When you're writing templated values (like variables), Jinja uses syntax like `{% raw %}{{var}}{% endraw %}`, and this collides with YAML's inline map notation. Instead of this:
 
 {% highlight yaml %}{% raw %}
 target_host: {{hostname}}
