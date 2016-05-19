@@ -9,7 +9,7 @@ tags: [ansible_bronze_bullet, ansible]
 
 <cite>-- Ansible designers (not a real quote, naturally)</cite>
 
-Ansible playbooks are written in YAML. You've probably seen YAML before. It's pretty straightforward data serialization format, very similar to JSON (in fact, it's a superset), but with sane additions like comments and not having to quote string keys. It's much much lighter than XML, but can represent a lot of the same things. Ruby on Rails is really hot on it. IMHO, it's better than JSON in every way I can think of.
+Ansible playbooks are written in YAML. You've probably seen YAML before. It's a pretty straightforward data serialization format, very similar to JSON (in fact, it's a superset), but with sane additions like comments and not having to quote string keys. It's much much lighter than XML, but can represent a lot of the same things. Ruby on Rails is really hot on it. IMHO, it's better than JSON in every way I can think of.
 
 The choice of using a serialization format to represent what is essentially a list of instructions is an odd one. That sounds like a *script* to me. Having your code look like it's declarative is deceptive when it's definitely going to get executed sequentially, like a script. We'd all love to think of our systems as sets of declarative configuration statements, but that's simply not realistic: entropy creeps into that careful order, and time rots all bits. And as your systems' states drift and that diff gets longer, it's harder to pull it back on course.
 
